@@ -22,5 +22,5 @@ interface APIService {
     @GET(PAYMENTS)
     suspend fun getPayments(
         @Query("token") token: String
-    ): Response<List<String>>
+    ): Response<Any>
 }
