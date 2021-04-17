@@ -1,8 +1,8 @@
 package com.ulanapp.aeon.data.actions
 
-import retrofit2.Response
+import com.ulanapp.aeon.data.api.LoginResponse
 
 interface APILoginAction {
 
-    suspend fun doLogin(login: String, password: String): Response<Any>
+    suspend fun doLogin(login: String, password: String): LoginResponse
 }
