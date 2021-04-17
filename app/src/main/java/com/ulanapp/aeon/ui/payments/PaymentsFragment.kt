@@ -1,16 +1,17 @@
 package com.ulanapp.aeon.ui.payments
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.ulanapp.aeon.MainActivity
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.actions.APIPaymentsActionImpl
 import com.ulanapp.aeon.data.responses.PaymentsResponse
+import com.ulanapp.aeon.utils.GlobalPref
 import kotlinx.android.synthetic.main.fragment_payments.*
 
 class PaymentsFragment : Fragment() {
@@ -39,28 +40,50 @@ class PaymentsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val toolbar = view.findViewById<Toolbar>(R.id.paymentsToolbar)
+        toolbar.inflateMenu(R.menu.exit_menu)
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.logout -> doLogOut()
+            }
+            true
+        }
+
         val apiPaymentsAction = APIPaymentsActionImpl()
 
         token = requireArguments().getString(TOKEN, "")
 
         paymentsViewModel = ViewModelProvider(this, PaymentsViewModelFactory(apiPaymentsAction))
             .get(PaymentsViewModel::class.java)
-        paymentsViewModel.loadPayments("123456789").observe(viewLifecycleOwner, {
+        paymentsViewModel.loadPayments(token).observe(viewLifecycleOwner, {
             setupAdapter(it.response)
         })
     }
 
+    private fun doLogOut() {
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
+        alertDialog.setTitle("Хотите выйти?")
+        alertDialog.setPositiveButton("Да") { _, _ ->
+            GlobalPref.apply {
+                loggedIn = false
+                token = ""
+            }
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            requireActivity().startActivity(intent)
+            requireActivity().finishAffinity()
+        }
+        alertDialog.setNegativeButton("Отмена") { dialog, _ ->
+            dialog.cancel()
+        }
+        val alert = alertDialog.create()
+        alert.show()
+    }
+
     // ставим адаптер
-    private fun setupAdapter(payments: List<PaymentsResponse.Response>)   {
+    private fun setupAdapter(payments: List<PaymentsResponse.Response>) {
         val adapter = PaymentsAdapter()
         adapter.setData(payments)
         rvPayments.adapter = adapter
-        rvPayments.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                LinearLayoutManager.HORIZONTAL
-            )
-        )
         adapter.notifyDataSetChanged()
     }
 }
