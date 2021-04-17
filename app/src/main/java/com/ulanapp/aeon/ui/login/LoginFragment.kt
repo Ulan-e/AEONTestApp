@@ -2,7 +2,6 @@ package com.ulanapp.aeon.ui.login
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.actions.APILoginActionImpl
+import com.ulanapp.aeon.ui.payments.PaymentsFragment
 import com.ulanapp.aeon.utils.showMessage
 import kotlinx.android.synthetic.main.fragment_login.*
-
 
 class LoginFragment : Fragment() {
 
@@ -41,10 +40,10 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory(apiLoginAction))
             .get(LoginViewModel::class.java)
 
-        clickToLogin(view)
+        handleClickLogin(view)
     }
 
-    private fun clickToLogin(view: View) {
+    private fun handleClickLogin(view: View) {
         btn_login.setOnClickListener {
             when {
                 isEmpty(login) && isEmpty(password) -> {
@@ -72,7 +71,12 @@ class LoginFragment : Fragment() {
         loginViewModel.doLogin(login.text.toString(), password.text.toString()).observe(
             viewLifecycleOwner, {
                 try {
-                    Log.d("iamuli", "fragment " + it.response.token)
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.container, PaymentsFragment.newInstance(it.response.token))
+                        .commit()
+
                 } catch (e: Exception) {
                     view.showMessage(resources.getString(R.string.error_login))
                 }
