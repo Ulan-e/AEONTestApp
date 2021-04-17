@@ -1,14 +1,17 @@
 package com.ulanapp.aeon.ui.payments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.actions.APIPaymentsActionImpl
+import com.ulanapp.aeon.data.responses.PaymentsResponse
+import kotlinx.android.synthetic.main.fragment_payments.*
 
 class PaymentsFragment : Fragment() {
 
@@ -43,7 +46,21 @@ class PaymentsFragment : Fragment() {
         paymentsViewModel = ViewModelProvider(this, PaymentsViewModelFactory(apiPaymentsAction))
             .get(PaymentsViewModel::class.java)
         paymentsViewModel.loadPayments("123456789").observe(viewLifecycleOwner, {
-            Log.d("iamuli", "Result Payments --->>  ${it.response.size}")
+            setupAdapter(it.response)
         })
+    }
+
+    // ставим адаптер
+    private fun setupAdapter(payments: List<PaymentsResponse.Response>)   {
+        val adapter = PaymentsAdapter()
+        adapter.setData(payments)
+        rvPayments.adapter = adapter
+        rvPayments.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
+        adapter.notifyDataSetChanged()
     }
 }
