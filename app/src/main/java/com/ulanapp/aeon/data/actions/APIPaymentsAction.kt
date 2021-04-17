@@ -1,8 +1,8 @@
 package com.ulanapp.aeon.data.actions
 
-import retrofit2.Response
+import com.ulanapp.aeon.data.responses.PaymentsResponse
 
 interface APIPaymentsAction {
 
-    suspend fun getPayments(token: String): Response<Any>
+    suspend fun getPayments(token: String): PaymentsResponse
 }

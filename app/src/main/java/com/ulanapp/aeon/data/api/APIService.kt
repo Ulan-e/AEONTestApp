@@ -1,5 +1,7 @@
 package com.ulanapp.aeon.data.api
 
+import com.ulanapp.aeon.data.responses.LoginResponse
+import com.ulanapp.aeon.data.responses.PaymentsResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -22,9 +24,7 @@ interface APIService {
     @GET(PAYMENTS)
     suspend fun getPayments(
         @Query("token") token: String
-    ): Response<Any>
+    ): PaymentsResponse
 }
 
-data class LoginResponse(val success: Boolean, val response: Response) {
-    data class Response(val token: String)
-}
+

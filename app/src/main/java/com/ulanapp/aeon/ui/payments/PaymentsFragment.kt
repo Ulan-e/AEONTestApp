@@ -39,13 +39,11 @@ class PaymentsFragment : Fragment() {
         val apiPaymentsAction = APIPaymentsActionImpl()
 
         token = requireArguments().getString(TOKEN, "")
-        Log.d("iamuli", "I get token --->>  $token")
 
         paymentsViewModel = ViewModelProvider(this, PaymentsViewModelFactory(apiPaymentsAction))
             .get(PaymentsViewModel::class.java)
         paymentsViewModel.loadPayments("123456789").observe(viewLifecycleOwner, {
-            Log.d("iamuli", "Result Payments --->>  ${it.body()}")
+            Log.d("iamuli", "Result Payments --->>  ${it.response.size}")
         })
-
     }
 }
