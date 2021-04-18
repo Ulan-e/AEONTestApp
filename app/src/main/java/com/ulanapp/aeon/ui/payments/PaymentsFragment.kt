@@ -7,14 +7,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ulanapp.aeon.ui.MainActivity
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.actions.APIPaymentsAction
-import com.ulanapp.aeon.data.actions.APIPaymentsActionImpl
 import com.ulanapp.aeon.data.responses.PaymentsResponse
 import com.ulanapp.aeon.utils.GlobalPref
+import com.ulanapp.aeon.utils.showMessage
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_payments.*
@@ -54,13 +53,19 @@ class PaymentsFragment : DaggerFragment() {
         paymentsViewModel = ViewModelProvider(this, PaymentsViewModelFactory(apiPaymentsAction))
             .get(PaymentsViewModel::class.java)
         paymentsViewModel.loadPayments(token).observe(viewLifecycleOwner, {
-            setupAdapter(it.response)
+            try {
+                progress_bar.visibility = View.GONE
+                setupAdapter(it.response)
+            } catch (e: Exception) {
+                view.showMessage(resources.getString(R.string.error_payments))
+            }
         })
     }
 
     private fun setToolbarOptions(view: View) {
         val toolbar = view.findViewById<Toolbar>(R.id.paymentsToolbar)
         toolbar.title = resources.getString(R.string.payments)
+        toolbar.setTitleTextColor(Color.WHITE)
         toolbar.inflateMenu(R.menu.exit_menu)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {

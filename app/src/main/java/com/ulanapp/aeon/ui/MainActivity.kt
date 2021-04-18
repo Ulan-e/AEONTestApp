@@ -30,4 +30,9 @@ class MainActivity : DaggerAppCompatActivity() {
                 .commit()
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

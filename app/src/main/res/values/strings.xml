@@ -9,6 +9,7 @@
     <string name="enter_login">Введите логин</string>
     <string name="enter_password">Введите пароль</string>
     <string name="error_login">Ошибка при авторизации</string>
+    <string name="error_payments">Платежи не найдены</string>
 
     <string name="logout">Выйти</string>
     <string name="want_to_logout">Хотите выйти?</string>
