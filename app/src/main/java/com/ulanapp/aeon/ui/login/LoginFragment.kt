@@ -16,6 +16,7 @@ import com.ulanapp.aeon.utils.showMessage
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_login.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginFragment : DaggerFragment() {
@@ -96,8 +97,9 @@ class LoginFragment : DaggerFragment() {
                         .addToBackStack(null)
                         .replace(R.id.container, PaymentsFragment())
                         .commit()
-
+                    Timber.d(it.toString())
                 } catch (e: Exception) {
+                    Timber.e("Exception in Login Operation %s", e.localizedMessage)
                     view.showMessage(resources.getString(R.string.error_login))
                 }
             })

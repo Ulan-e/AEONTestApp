@@ -14,7 +14,6 @@
         android:hint="@string/login"
         android:padding="@dimen/padding_10dp"
         android:textSize="@dimen/text_size_18sp"
-        android:inputType="textShortMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

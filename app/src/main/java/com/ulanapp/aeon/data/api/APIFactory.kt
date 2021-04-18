@@ -4,6 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object APIFactory {
 
@@ -12,14 +13,18 @@ object APIFactory {
     fun create(): APIService {
 
         val httpclient = OkHttpClient.Builder()
-        httpclient.addInterceptor(Interceptor { chain ->
-            val request = chain.request()
-                .newBuilder()
-                .addHeader("app-key", "12345")
-                .addHeader("v", "1")
-                .build()
-            chain.proceed(request)
-        })
+        httpclient.apply {
+            readTimeout(30, TimeUnit.SECONDS)
+            connectTimeout(30, TimeUnit.SECONDS)
+            addInterceptor(Interceptor { chain ->
+                val request = chain.request()
+                    .newBuilder()
+                    .addHeader("app-key", "12345")
+                    .addHeader("v", "1")
+                    .build()
+                chain.proceed(request)
+            })
+        }
 
         val retrofit = Retrofit.Builder()
             .client(httpclient.build())

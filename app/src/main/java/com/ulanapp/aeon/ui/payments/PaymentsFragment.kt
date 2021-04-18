@@ -17,6 +17,7 @@ import com.ulanapp.aeon.utils.showMessage
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_payments.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class PaymentsFragment : DaggerFragment() {
@@ -56,7 +57,9 @@ class PaymentsFragment : DaggerFragment() {
             try {
                 progress_bar.visibility = View.GONE
                 setupAdapter(it.response)
+                Timber.d(it.toString())
             } catch (e: Exception) {
+                Timber.e("Exception in Payments Operation %s", e.localizedMessage)
                 view.showMessage(resources.getString(R.string.error_payments))
             }
         })
