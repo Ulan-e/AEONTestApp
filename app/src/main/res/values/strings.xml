@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">AEON</string>
+    <string name="login">Логин</string>
+    <string name="payments">Платежи</string>
+    <string name="password">Пароль</string>
+    <string name="enter">Войти</string>
+
+    <string name="enter_login_and_password">Введите логин и пароль</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="error_login">Ошибка при авторизации</string>
+    <string name="error_payments">Платежи не найдены</string>
+
+    <string name="logout">Выйти</string>
+    <string name="want_to_logout">Хотите выйти?</string>
+    <string name="exit">Выход</string>
+    <string name="cancel">Отмена</string>
 </resources>
