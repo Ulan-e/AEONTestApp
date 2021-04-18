@@ -91,18 +91,21 @@ class LoginFragment : DaggerFragment() {
                     val genToken = it.response.token
 
                     saveUserData(genToken)
-
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.container, PaymentsFragment())
-                        .commit()
+                    openPaymentsScreen()
                     Timber.d(it.toString())
                 } catch (e: Exception) {
                     Timber.e("Exception in Login Operation %s", e.localizedMessage)
                     view.showMessage(resources.getString(R.string.error_login))
                 }
             })
+    }
+
+    private fun openPaymentsScreen() {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.container, PaymentsFragment())
+            .commit()
     }
 
     // сохранение данных пользователя в Preference
