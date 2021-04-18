@@ -1,9 +1,8 @@
 package com.ulanapp.aeon.ui.payments
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.ulanapp.aeon.data.actions.APILoginAction
-import com.ulanapp.aeon.data.actions.APILoginActionImpl
 import com.ulanapp.aeon.data.actions.APIPaymentsAction
 import kotlinx.coroutines.Dispatchers
 
@@ -13,5 +12,6 @@ class PaymentsViewModel(
 
     fun loadPayments(token: String) = liveData(Dispatchers.IO) {
         emit(apiPaymentsAction.getPayments(token))
+        Log.d("iamuli", apiPaymentsAction.getPayments(token).toString())
     }
 }

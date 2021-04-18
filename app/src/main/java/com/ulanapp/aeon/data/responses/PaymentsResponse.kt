@@ -8,7 +8,7 @@ data class PaymentsResponse(
     data class Response(
         val desc: String,
         val amount: Double,
-        val currency: String,
-        val created: Double,
+        val currency: String?,
+        val created: Long,
     )
 }

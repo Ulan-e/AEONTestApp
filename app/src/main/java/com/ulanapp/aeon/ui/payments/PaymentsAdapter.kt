@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.responses.PaymentsResponse
+import com.ulanapp.aeon.utils.*
 import kotlinx.android.synthetic.main.payments_list_item.view.*
 import javax.inject.Inject
 
@@ -37,10 +38,10 @@ class PaymentsAdapter @Inject constructor() :
     class PaymentsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(payment: PaymentsResponse.Response) {
-            itemView.tvDesc.text = payment.desc
-            itemView.tvAmount.text = payment.amount.toString()
-            itemView.tvCurrency.text = payment.currency
-            itemView.tvCreated.text = payment.created.toString()
+            itemView.tvDesc.text = payment.desc.removeDuplicates()
+            itemView.tvAmount.text =  payment.amount.convertAmountToDecimalFormat()
+            itemView.tvCurrency.text = payment.currency.checkCurrency()
+            itemView.tvCreated.text = payment.created.setCreatedTime()
         }
     }
 }
