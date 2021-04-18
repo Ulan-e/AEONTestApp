@@ -1,6 +1,5 @@
 package com.ulanapp.aeon.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.ui.login.LoginFragment
@@ -16,11 +15,14 @@ class MainActivity : DaggerAppCompatActivity() {
         AndroidInjection.inject(this)
         setContentView(R.layout.activity_main)
 
+        // если пользователь уже залогинился
         if (GlobalPref.loggedIn) {
             supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, PaymentsFragment())
                 .commit()
+
+        // если пользователь не залогинился
         } else {
             supportFragmentManager.beginTransaction()
                 .addToBackStack(null)

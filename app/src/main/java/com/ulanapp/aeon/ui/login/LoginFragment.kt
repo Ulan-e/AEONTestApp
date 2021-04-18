@@ -3,13 +3,13 @@ package com.ulanapp.aeon.ui.login
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.actions.APILoginAction
-import com.ulanapp.aeon.data.actions.APILoginActionImpl
 import com.ulanapp.aeon.ui.payments.PaymentsFragment
 import com.ulanapp.aeon.utils.GlobalPref
 import com.ulanapp.aeon.utils.showMessage
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class LoginFragment : DaggerFragment() {
 
     @Inject
-    lateinit var apiLoginAction : APILoginAction
+    lateinit var apiLoginAction: APILoginAction
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -58,6 +58,7 @@ class LoginFragment : DaggerFragment() {
         handleClickLogin(view)
     }
 
+    // клик на логин
     private fun handleClickLogin(view: View) {
         btn_login.setOnClickListener {
             when {
@@ -82,6 +83,7 @@ class LoginFragment : DaggerFragment() {
         return TextUtils.isEmpty(str)
     }
 
+    // действие после успешного логина
     private fun doSuccessLogin(view: View) {
         loginViewModel.doLogin(login.text.toString(), password.text.toString()).observe(
             viewLifecycleOwner, {
@@ -102,6 +104,7 @@ class LoginFragment : DaggerFragment() {
             })
     }
 
+    // сохранение данных пользователя в Preference
     private fun saveUserData(genToken: String) {
         GlobalPref.apply {
             loggedIn = true

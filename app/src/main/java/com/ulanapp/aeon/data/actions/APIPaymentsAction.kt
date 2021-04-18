@@ -4,5 +4,6 @@ import com.ulanapp.aeon.data.responses.PaymentsResponse
 
 interface APIPaymentsAction {
 
+    // метод для получения списка платежей
     suspend fun getPayments(token: String): PaymentsResponse
 }

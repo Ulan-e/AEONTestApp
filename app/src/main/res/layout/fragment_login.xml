@@ -14,6 +14,7 @@
         android:hint="@string/login"
         android:padding="@dimen/padding_10dp"
         android:textSize="@dimen/text_size_20sp"
+        android:inputType="textShortMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,16 +26,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_20dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="@dimen/margin_7dp"
         android:background="@drawable/bg_rounded_transparent"
         android:hint="@string/password"
         android:padding="@dimen/padding_10dp"
         android:textSize="@dimen/text_size_20sp"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_login" />
 
-    <!-- кнопка войти -->
+    <!-- кнопка для логина -->
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
@@ -42,6 +44,6 @@
         android:layout_marginHorizontal="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_10dp"
         android:text="@string/enter"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_16sp"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

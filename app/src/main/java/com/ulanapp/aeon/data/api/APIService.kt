@@ -2,7 +2,6 @@ package com.ulanapp.aeon.data.api
 
 import com.ulanapp.aeon.data.responses.LoginResponse
 import com.ulanapp.aeon.data.responses.PaymentsResponse
-import retrofit2.Response
 import retrofit2.http.*
 
 interface APIService {
@@ -26,5 +25,3 @@ interface APIService {
         @Query("token") token: String
     ): PaymentsResponse
 }
-
-

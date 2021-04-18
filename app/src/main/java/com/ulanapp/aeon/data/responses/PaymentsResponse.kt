@@ -2,10 +2,10 @@ package com.ulanapp.aeon.data.responses
 
 data class PaymentsResponse(
     val success: Boolean,
-    val response: List<Response>
+    val response: List<PaymentInfo>
 ) {
 
-    data class Response(
+    data class PaymentInfo(
         val desc: String,
         val amount: Double,
         val currency: String?,

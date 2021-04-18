@@ -98,7 +98,7 @@ class PaymentsFragment : DaggerFragment() {
     }
 
     // ставим адаптер
-    private fun setupAdapter(payments: List<PaymentsResponse.Response>) {
+    private fun setupAdapter(payments: List<PaymentsResponse.PaymentInfo>) {
         adapter.setData(payments)
         rvPayments.adapter = adapter
         adapter.notifyDataSetChanged()

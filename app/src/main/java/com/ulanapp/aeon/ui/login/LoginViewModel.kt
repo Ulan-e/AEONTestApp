@@ -9,6 +9,7 @@ class LoginViewModel(
     private var apiLoginAction: APILoginAction
 ) : ViewModel() {
 
+    // запрос на логин и получения токена
     fun doLogin(login: String,password: String) = liveData(Dispatchers.IO) {
         emit(apiLoginAction.doLogin(login, password))
     }

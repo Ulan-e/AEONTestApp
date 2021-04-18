@@ -1,6 +1,9 @@
 package com.ulanapp.aeon.data.responses
 
-data class LoginResponse(val success: Boolean, val response: Response) {
+data class LoginResponse(
+    val success: Boolean,
+    val response: Token
+) {
 
-    data class Response(val token: String)
+    data class Token(val token: String)
 }

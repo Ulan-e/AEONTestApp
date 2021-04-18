@@ -13,7 +13,7 @@ import javax.inject.Inject
 class PaymentsAdapter @Inject constructor() :
     RecyclerView.Adapter<PaymentsAdapter.PaymentsViewHolder>() {
 
-    private lateinit var paymentsList: List<PaymentsResponse.Response>
+    private lateinit var paymentsList: List<PaymentsResponse.PaymentInfo>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentsViewHolder {
         return PaymentsViewHolder(
@@ -31,13 +31,14 @@ class PaymentsAdapter @Inject constructor() :
         return paymentsList.size
     }
 
-    fun setData(payments: List<PaymentsResponse.Response>) {
+    // ставим данные в адаптер
+    fun setData(payments: List<PaymentsResponse.PaymentInfo>) {
         paymentsList = payments
     }
 
     class PaymentsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(payment: PaymentsResponse.Response) {
+        fun bind(payment: PaymentsResponse.PaymentInfo) {
             itemView.tvDesc.text = payment.desc.removeDuplicates()
             itemView.tvAmount.text =  payment.amount.convertAmountToDecimalFormat()
             itemView.tvCurrency.text = payment.currency.checkCurrency()
