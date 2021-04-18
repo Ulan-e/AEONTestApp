@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ulanapp.aeon.R
 import com.ulanapp.aeon.data.responses.PaymentsResponse
 import kotlinx.android.synthetic.main.payments_list_item.view.*
+import javax.inject.Inject
 
-class PaymentsAdapter : RecyclerView.Adapter<PaymentsAdapter.PaymentsViewHolder>() {
+class PaymentsAdapter @Inject constructor() :
+    RecyclerView.Adapter<PaymentsAdapter.PaymentsViewHolder>() {
 
     private lateinit var paymentsList: List<PaymentsResponse.Response>
 
@@ -28,13 +30,13 @@ class PaymentsAdapter : RecyclerView.Adapter<PaymentsAdapter.PaymentsViewHolder>
         return paymentsList.size
     }
 
-    fun setData(payments: List<PaymentsResponse.Response>){
+    fun setData(payments: List<PaymentsResponse.Response>) {
         paymentsList = payments
     }
 
     class PaymentsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(payment: PaymentsResponse.Response){
+        fun bind(payment: PaymentsResponse.Response) {
             itemView.tvDesc.text = payment.desc
             itemView.tvAmount.text = payment.amount.toString()
             itemView.tvCurrency.text = payment.currency

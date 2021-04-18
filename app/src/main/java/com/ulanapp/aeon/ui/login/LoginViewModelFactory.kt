@@ -2,10 +2,10 @@ package com.ulanapp.aeon.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ulanapp.aeon.data.actions.APILoginActionImpl
+import com.ulanapp.aeon.data.actions.APILoginAction
 
 class LoginViewModelFactory(
-    private var apiLoginAction: APILoginActionImpl
+    private var apiLoginAction: APILoginAction
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
