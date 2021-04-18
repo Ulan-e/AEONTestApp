@@ -83,7 +83,6 @@ class LoginFragment : DaggerFragment() {
         return TextUtils.isEmpty(str)
     }
 
-    // действие после успешного логина
     private fun doSuccessLogin(view: View) {
         loginViewModel.doLogin(login.text.toString(), password.text.toString()).observe(
             viewLifecycleOwner, {

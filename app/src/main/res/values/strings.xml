@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AEON</string>
     <string name="login">Логин</string>
+    <string name="payments">Платежи</string>
     <string name="password">Пароль</string>
     <string name="enter">Войти</string>
 
@@ -13,5 +14,4 @@
     <string name="want_to_logout">Хотите выйти?</string>
     <string name="exit">Выход</string>
     <string name="cancel">Отмена</string>
-
 </resources>

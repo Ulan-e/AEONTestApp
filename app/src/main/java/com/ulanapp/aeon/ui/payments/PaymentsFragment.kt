@@ -60,6 +60,7 @@ class PaymentsFragment : DaggerFragment() {
 
     private fun setToolbarOptions(view: View) {
         val toolbar = view.findViewById<Toolbar>(R.id.paymentsToolbar)
+        toolbar.title = resources.getString(R.string.payments)
         toolbar.inflateMenu(R.menu.exit_menu)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -69,21 +70,26 @@ class PaymentsFragment : DaggerFragment() {
         }
     }
 
+    // диалог для потверждение выхода
     private fun showLogOutDialog() {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
         alertDialog.setTitle(resources.getString(R.string.want_to_logout))
         alertDialog.setPositiveButton(resources.getString(R.string.exit)) { _, _ ->
+
             clearUserData()
+
             restartApp()
         }
         alertDialog.setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
             dialog.cancel()
         }
+
         val alert = alertDialog.create()
         alert.show()
         alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.GRAY)
     }
 
+    // очистка пользовательских данных с Preference
     private fun clearUserData() {
         GlobalPref.apply {
             loggedIn = false
@@ -91,13 +97,14 @@ class PaymentsFragment : DaggerFragment() {
         }
     }
 
+    // рестарт приложения
     private fun restartApp() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         requireActivity().startActivity(intent)
         requireActivity().finishAffinity()
     }
 
-    // ставим адаптер
+    // настраиваем адаптер
     private fun setupAdapter(payments: List<PaymentsResponse.PaymentInfo>) {
         adapter.setData(payments)
         rvPayments.adapter = adapter
